@@ -1,3 +1,0 @@
-export const onRequestPost = async () => {
-  return new Response(null, {status:204, headers:{'Set-Cookie': 'session=; Path=/; Max-Age=0; SameSite=Lax; Secure'}});
-};
