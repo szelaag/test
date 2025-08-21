@@ -1,0 +1,498 @@
+
+/* ====== Reset & base ====== */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.65;color:#ffffff;background:#0b1221}
+img{max-width:100%;height:auto;border:0;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{line-height:1.2;margin:0 0 .6rem}
+p{margin:0 0 1rem}
+ul{margin:0 0 1rem;padding-left:1.25rem}
+:root{
+  --bg:#0b1221;
+  --panel:#0e1630;
+  --muted:#c9d6f2;
+  --text:#ffffff;
+  --brand:#6aa6ff;
+  --brand-2:#b7d2ff;
+  --ok:#8ce99a;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+.container{width:min(1150px,92vw);margin-inline:auto}
+.section{padding:64px 0}
+.section-head{margin-bottom:28px}
+.section-head p{color:var(--muted);margin-top:.2rem}
+
+.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;background:#fff;color:#000;padding:.5rem 1rem;border-radius:.5rem;z-index:9999}
+
+/* ====== Header / Nav ====== */
+.site-header{position:sticky;top:0;z-index:1000;background:rgba(11,18,33,.7);backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid rgba(255,255,255,.08)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:.6rem;color:var(--text);font-weight:600;font-size:1.05rem}
+.brand img{filter:drop-shadow(0 6px 10px rgba(0,0,0,.3))}
+
+.nav-toggle{display:none;background:none;border:0;cursor:pointer}
+.nav-toggle .bar{display:block;width:22px;height:2px;background:#e8efff;margin:4px 0;border-radius:2px;transition:.2s}
+
+.nav-list{list-style:none;display:flex;gap:20px;align-items:center;margin:0}
+.nav-list a{display:inline-block;padding:8px 10px;border-radius:.5rem;color:var(--text)}
+.nav-list a:hover{background:rgba(255,255,255,.08)}
+
+.btn{display:inline-block;padding:12px 18px;border-radius:12px;font-weight:600;border:1px solid transparent;transition:transform .06s ease,box-shadow .2s ease,background .2s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn-primary{background:linear-gradient(180deg,#85b6ff,#4d86f7);color:#0b1221;box-shadow:0 8px 20px rgba(102,153,255,.32)}
+.btn-ghost{border-color:rgba(255,255,255,.28);color:var(--text);background:rgba(255,255,255,.08)}
+.btn-small{padding:8px 12px;border-radius:10px}
+
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;padding:48px 0}
+.hero h1{font-size:clamp(1.8rem,2.2vw + 1.2rem,3rem);color:var(--text)}
+.hero p{color:var(--muted)}
+.accent{color:var(--brand)}
+.hero-bullets{display:flex;gap:18px;flex-wrap:wrap;color:var(--brand-2);font-weight:600}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+.hero-visual{border-radius:20px;overflow:hidden;box-shadow:var(--shadow);background:#0e1630}
+
+/* ====== Trust list ====== */
+.trust-list{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.trust-list li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}
+.trust-list img{width:56px;height:56px}
+
+/* ====== Cards ====== */
+.cards{display:grid;gap:20px}
+.cards.two{grid-template-columns:repeat(2,1fr)}
+.cards.three{grid-template-columns:repeat(3,1fr)}
+.cards.four{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--panel);color:var(--text);border:1px solid rgba(255,255,255,.06);border-radius:18px;overflow:hidden;padding:18px;box-shadow:0 8px 16px rgba(0,0,0,.2)}
+.card h3{margin-top:.4rem}
+.card img{border-radius:12px}
+.check{list-style:none;padding:0;margin:12px 0 0}
+.check li{padding-left:26px;position:relative;margin:.35rem 0}
+.check li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:800}
+
+/* ====== Steps ====== */
+.steps{counter-reset:step;list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.steps li{background:var(--panel);padding:16px 16px 16px 56px;border-radius:14px;border:1px solid rgba(255,255,255,.06);position:relative}
+.steps li::before{counter-increment:step;content:counter(step);position:absolute;left:16px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;background:#1a2546;color:#cfe0ff;display:grid;place-items:center;font-weight:700}
+
+/* ====== Testimonials ====== */
+.testimonials{display:grid;gap:20px;grid-template-columns:repeat(3,1fr)}
+.testimonial{background:var(--panel);padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,.06)}
+.testimonial img{border-radius:50%;margin-bottom:8px}
+
+/* ====== Pricing ====== */
+.pricing{display:grid;gap:20px;grid-template-columns:1fr 1fr}
+.price-card{background:var(--panel);padding:22px;border-radius:18px;border:1px solid rgba(255,255,255,.06)}
+.price-card.featured{border-color:#5a8fff;box-shadow:0 10px 30px rgba(71,119,255,.25)}
+
+/* ====== FAQ ====== */
+.faq-item{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:12px 16px;margin:10px 0}
+.faq-item summary{cursor:pointer;font-weight:600}
+.faq-item[open]{box-shadow:0 8px 16px rgba(0,0,0,.2)}
+
+/* ====== Contact ====== */
+.contact-section{background:radial-gradient(1200px 600px at 50% -20%,rgba(90,143,255,.22),transparent),var(--bg)}
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start}
+.contact-grid > .section-head{grid-column:1 / -1}
+.form-card{display:grid;gap:14px}
+.form-row{display:grid;gap:6px}
+label{font-weight:600}
+input,textarea{background:#0d1530;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:12px 14px;color:var(--text);font:inherit}
+input::placeholder,textarea::placeholder{color:#e1e9ff}
+input:focus,textarea:focus{outline:2px solid #5a8fff;outline-offset:2px}
+.form-actions{display:flex;gap:12px;align-items:center}
+#form-status{color:var(--brand-2)}
+.contact-aside{background:var(--panel);padding:18px;border:1px solid rgba(255,255,255,.06);border-radius:18px}
+
+/* ====== Footer ====== */
+.site-footer{border-top:1px solid rgba(255,255,255,.08);margin-top:48px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;padding:20px 0;color:#dbe6ff}
+.back-to-top{display:inline-block;background:#142044;border:1px solid rgba(255,255,255,.12);color:#dbe6ff;padding:6px 10px;border-radius:10px}
+
+/* ====== Reveal on scroll ====== */
+.reveal{opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ====== Utilities ====== */
+.micro{font-size:.95rem;color:#dbe6ff}
+
+/* ====== Responsive ====== */
+@media (max-width:1200px){
+  .cards.four{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:960px){
+  .hero{grid-template-columns:1fr;gap:20px}
+  .cards.three{grid-template-columns:1fr 1fr}
+  .cards.four{grid-template-columns:1fr 1fr}
+  .pricing{grid-template-columns:1fr}
+  .testimonials{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .trust-list{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .nav-toggle{display:block}
+  .nav-list{position:fixed;inset:60px 16px auto 16px;background:#0f1730;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px;flex-direction:column;gap:8px;box-shadow:var(--shadow);display:none}
+  .nav-list.open{display:flex}
+  .cards.three{grid-template-columns:1fr}
+  .cards.four{grid-template-columns:1fr}
+  .trust-list{grid-template-columns:1fr}
+}
+
+/* === Projects tighter layout & bigger thumbnails === */
+.cards.four{grid-template-columns:repeat(4,1fr);gap:12px}
+.cards.four .card{padding:14px}
+.cards.four .card img{width:100%;height:auto;border-radius:14px}
+
+/* === Contact section: make form full-width (single column) === */
+.contact-grid{grid-template-columns:1fr !important;align-items:start}
+.contact-grid > .section-head{grid-column:1 / -1}
+
+/* === Footer contact block === */
+.footer-inner{flex-wrap:wrap;gap:16px}
+.footer-contact{font-style:normal;color:#dbe6ff;opacity:.95}
+.footer-contact a{text-decoration:underline}
+
+/* === Slightly wider container on large screens to help 4-up grid breathe */
+@media (min-width:1280px){
+  .container{width:min(1250px,92vw)}
+}
+@media (max-width:1200px){
+  .cards.four{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:960px){
+  .cards.four{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .cards.four{grid-template-columns:1fr}
+}
+
+/* === Scope changes to REALIZACJE only; keep OFERTA like before === */
+#realizacje .cards.four{grid-template-columns:repeat(4,1fr);gap:8px}
+#realizacje .cards.four .card{padding:10px}
+#realizacje .cards.four .card img{width:100%;height:auto;border-radius:14px}
+#realizacje .cards.four figcaption{margin-top:10px;font-size:1.05rem;line-height:1.35}
+
+/* Revert container width to previous default on xl screens (so Oferta nie rośnie) */
+@media (min-width:1280px){
+  .container{width:min(1150px,92vw)}
+}
+
+
+/* === Realizacje: większe kafelki + ciaśniej (bez wpływu na inne sekcje) === */
+#realizacje .container{width:min(1280px,94vw)}
+#realizacje .cards.four{grid-template-columns:repeat(4,1fr);gap:6px}
+#realizacje .cards.four .card{padding:12px}
+#realizacje .cards.four .card img{width:100%;height:auto;border-radius:14px;display:block}
+#realizacje .cards.four figcaption{margin-top:10px;font-size:1.1rem;line-height:1.35}
+
+/* === Hero: większy odstęp pod przyciskami do szarego tekstu === */
+.hero .micro{margin-top:18px}
+
+
+/* === REALIZACJE: większe miniatury + więcej miejsca na opis === */
+#realizacje .container{width:min(1380px,96vw)} /* większa szerokość tylko dla tej sekcji */
+#realizacje .cards.four{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+#realizacje .cards.four .card{padding:10px;display:flex;flex-direction:column}
+#realizacje .cards.four .card img{width:100%;height:auto;border-radius:14px;display:block}
+#realizacje .cards.four figcaption{
+  margin-top:12px;
+  font-size:1.12rem;
+  line-height:1.45;
+  min-height:calc(1.45em * 4);            /* równa wysokość podpisów (do ~4 linii) */
+  display:-webkit-box;
+  -webkit-line-clamp:4;                   /* maks 4 linie tekstu */
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+/* Responsywność niezmieniona – 3/2/1 kolumny przy mniejszych szerokościach */
+
+
+/* === REALIZACJE: dużo większy kontener + większe miniatury === */
+#realizacje .container{width:min(1680px,98vw)} /* znacząco szerzej tylko tutaj */
+#realizacje .cards.four{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+#realizacje .cards.four .card{padding:14px;display:flex;flex-direction:column}
+#realizacje .cards.four .card img{width:100%;height:auto;border-radius:16px}
+#realizacje .cards.four figcaption{margin-top:12px;font-size:1.16rem;line-height:1.45}
+#realizacje .cards.four .project-desc{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:1rem;
+  line-height:1.55;
+  white-space:pre-line;
+  display:-webkit-box;
+  -webkit-line-clamp:4;         /* do 4 linii opisu */
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  min-height:calc(1.55em * 3);  /* minimalna wysokość, by karty miały równe doły */
+}
+
+
+/* === REALIZACJE: jeszcze szerzej, pełny tekst, ciaśniej === */
+#realizacje .container{width:min(1800px,98vw)}          /* szerszy kontener tylko tutaj */
+#realizacje .cards.four{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+#realizacje .cards.four .card{padding:8px}              /* mniejszy padding = większa miniatura */
+#realizacje .cards.four .card img{width:100%;height:auto;border-radius:16px;display:block}
+#realizacje .cards.four figcaption{margin-top:10px;font-size:1.14rem;line-height:1.45}
+#realizacje .cards.four .project-desc{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:1.02rem;
+  line-height:1.55;
+  white-space:pre-line;
+  /* usuń ograniczenia linii — pokaż cały tekst */
+  display:block;
+  -webkit-line-clamp:unset;
+  -webkit-box-orient:unset;
+  overflow:visible;
+  min-height:0;
+}
+
+
+/* === FIX: #realizacje ma klasę .container na tym samym elemencie === */
+#realizacje.container{width:min(1920px,98vw)} /* nadpisuje globalną szerokość tylko dla tej sekcji */
+
+
+/* === REALIZACJE: dopasowanie do reszty projektu (bez wystawania) === */
+#realizacje.container{width:min(1150px,92vw)}        /* równe krawędzie jak inne sekcje */
+#realizacje .cards.four{gap:8px}                     /* nadal blisko, ale czytelnie */
+#realizacje .cards.four .card{padding:10px}          /* nieco większy padding dla oddechu */
+
+
+/* === REALIZACJE: wypełnij przestrzeń w tej samej ramie === */
+#realizacje .cards.four{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+#realizacje .cards.four .card{padding:6px}
+#realizacje .cards.four .card img{border-radius:14px}
+
+
+/* === REALIZACJE: 2x2 pełnoszerokie kafle, duży podgląd + tytuł === */
+#realizacje.container{width:min(1150px,92vw)} /* spójnie z innymi sekcjami */
+#realizacje .projects-grid2{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:14px;
+}
+#realizacje .project-tile{display:flex;flex-direction:column;gap:10px}
+#realizacje .project-tile h3{margin:0;font-size:1.2rem}
+#realizacje .tile-media{
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 14px 30px rgba(0,0,0,.35);
+  background:linear-gradient(180deg, rgba(90,143,255,.18), rgba(20,30,60,.6));
+  aspect-ratio: 16 / 10; /* duży podgląd */
+}
+#realizacje .tile-media img{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:960px){
+  #realizacje .projects-grid2{grid-template-columns:1fr}
+}
+
+
+/* === REALIZACJE: pasek tytułu na obrazie === */
+#realizacje .tile-media{position:relative;border-radius:20px;overflow:hidden}
+#realizacje .tile-caption{
+  position:absolute;left:0;right:0;bottom:0;
+  background:rgba(6,12,28,.62);
+  backdrop-filter:saturate(120%) blur(2px);
+  color:#fff;
+  padding:14px 16px;
+  display:flex;align-items:center;
+  min-height:56px;
+  border-bottom-left-radius:20px;border-bottom-right-radius:20px;
+}
+#realizacje .tile-caption span{
+  font-size:clamp(1rem, .5vw + 1rem, 1.25rem);
+  font-weight:700;
+  letter-spacing:.2px;
+}
+
+
+/* === REALIZACJE: hover expand overlay (title smaller, desc appears) === */
+#realizacje .tile-media{position:relative;border-radius:20px;overflow:hidden}
+#realizacje .tile-caption{
+  position:absolute;left:0;right:0;bottom:0;
+  background:rgba(8,12,28,.55);
+  backdrop-filter:saturate(120%) blur(2px);
+  color:#fff;
+  padding:12px 14px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  min-height:56px;
+  transition:inset .28s ease, padding .28s ease, background .28s ease;
+}
+#realizacje .tile-title{
+  margin:0 0 4px 0;
+  font-size:clamp(.95rem,.35vw + .95rem,1.1rem); /* mniejszy tytuł */
+  font-weight:750;
+  line-height:1.25;
+}
+#realizacje .tile-desc{
+  margin:0;
+  color:#d1dcff;
+  font-size:.98rem;
+  line-height:1.5;
+  white-space:pre-line;
+  opacity:0;
+  transform:translateY(6px);
+  max-height:0;
+  overflow:hidden;
+  transition:opacity .22s ease, transform .22s ease, max-height .22s ease;
+}
+
+/* Hover/focus: pasek rozszerza się na całe zdjęcie, tytuł do góry, opis widać */
+#realizacje .tile-media:hover .tile-caption,
+#realizacje .tile-media:focus-within .tile-caption{
+  inset:0;
+  padding:16px 18px;
+  background:rgba(8,12,28,.78);
+  justify-content:flex-start;
+}
+#realizacje .tile-media:hover .tile-desc,
+#realizacje .tile-media:focus-within .tile-desc{
+  opacity:1;
+  transform:none;
+  max-height:1000px;
+}
+
+
+/* === REALIZACJE: płynniejszy hover — tytuł wyśrodkowany start, potem do góry + opis === */
+/* Reset poprzedniego wariantu (opartego na inset) */
+#realizacje .tile-caption{inset:auto !important}
+
+/* Stan początkowy: wąski pasek u dołu, tytuł centralnie w pionie i poziomie */
+#realizacje .tile-media{position:relative;overflow:hidden;border-radius:20px}
+#realizacje .tile-caption{
+  position:absolute;left:0;right:0;bottom:0;
+  height:56px;
+  background:rgba(8,12,28,.52);
+  backdrop-filter:saturate(120%) blur(2px);
+  color:#fff;
+  padding:8px 12px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  transition:
+    height .45s cubic-bezier(.22,.61,.36,1),
+    padding .45s cubic-bezier(.22,.61,.36,1),
+    background .30s ease;
+}
+#realizacje .tile-title{
+  margin:0;
+  font-size:clamp(.9rem,.35vw + .9rem,1.05rem); /* nieco mniejszy, elegancki */
+  font-weight:750;
+  line-height:1.25;
+  transform:translateY(0);
+  transition:transform .45s cubic-bezier(.22,.61,.36,1);
+}
+#realizacje .tile-desc{
+  margin:10px 0 0;
+  color:#d1dcff;
+  font-size:.96rem;
+  line-height:1.5;
+  white-space:pre-line;
+  opacity:0;
+  transform:translateY(12px);
+  max-height:0;
+  overflow:hidden;
+  transition:
+    opacity .35s ease .05s,
+    transform .35s ease .05s,
+    max-height .35s ease .05s;
+}
+
+/* Hover/focus: overlay na całe zdjęcie; tytuł płynnie „do góry”; opis się pokazuje */
+#realizacje .tile-media:hover .tile-caption,
+#realizacje .tile-media:focus-within .tile-caption{
+  height:100%;
+  padding:18px;
+  align-items:flex-start;
+  justify-content:flex-start;
+  text-align:left;
+  background:rgba(8,12,28,.78);
+}
+#realizacje .tile-media:hover .tile-title,
+#realizacje .tile-media:focus-within .tile-title{
+  transform:translateY(-6px);
+}
+#realizacje .tile-media:hover .tile-desc,
+#realizacje .tile-media:focus-within .tile-desc{
+  opacity:1;
+  transform:none;
+  max-height:1000px;
+}
+
+
+/* === FIX REALIZACJE CAPTION VISIBILITY & SMOOTH ANIMATION === */
+#realizacje .tile-media{position:relative;overflow:hidden;border-radius:20px}
+#realizacje .tile-media img{display:block;width:100%;height:100%;object-fit:cover}
+#realizacje .tile-caption{
+  position:absolute;
+  left:0 !important; right:0 !important; bottom:0 !important; top:auto !important; /* anchor to bottom */
+  z-index:2;
+  width:100%;
+  background:rgba(8,12,28,.55);
+  backdrop-filter:saturate(120%) blur(2px);
+  color:#fff;
+  padding:10px 14px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  max-height:84px; /* initial slim bar */
+  transition:
+    max-height .5s cubic-bezier(.22,.61,.36,1),
+    padding .35s cubic-bezier(.22,.61,.36,1),
+    background .30s ease;
+}
+#realizacje .tile-title{
+  margin:0;
+  font-size:clamp(.9rem,.35vw + .9rem,1.05rem);
+  font-weight:750;line-height:1.25;
+  transition:transform .45s cubic-bezier(.22,.61,.36,1), text-align .3s ease;
+}
+#realizacje .tile-desc{
+  margin:10px 0 0;
+  color:#d1dcff;font-size:.96rem;line-height:1.5;white-space:pre-line;
+  opacity:0;transform:translateY(10px);
+  max-height:0;overflow:hidden;
+  transition:opacity .35s ease .05s, transform .35s ease .05s, max-height .35s ease .05s;
+}
+#realizacje .tile-media:hover .tile-caption,
+#realizacje .tile-media:focus-within .tile-caption{
+  max-height:100%;
+  padding:18px;
+  align-items:flex-start;justify-content:flex-start;text-align:left;
+  background:rgba(8,12,28,.78);
+}
+#realizacje .tile-media:hover .tile-title,
+#realizacje .tile-media:focus-within .tile-title{
+  transform:translateY(-6px);
+}
+#realizacje .tile-media:hover .tile-desc,
+#realizacje .tile-media:focus-within .tile-desc{
+  opacity:1;transform:none;max-height:1000px;
+}
+
+
+/* === REALIZACJE: płynne zamykanie overlaya przy wyjściu kursora === */
+#realizacje .tile-media{
+  /* domyślne opóźnienia przy WYJŚCIU: najpierw schowaj opis, potem zwijaj overlay */
+  --cap-delay: .12s;   /* overlay height/padding delay (pozwól opisowi zniknąć) */
+  --desc-delay: 0s;    /* opis znika od razu */
+  will-change: transform;
+}
+#realizacje .tile-caption{
+  transition:
+    max-height .5s cubic-bezier(.22,.61,.36,1) var(--cap-delay),
+    padding .35s cubic-bezier(.22,.61,.36,1) var(--cap-delay),
+    background .30s ease var(--cap-delay);
+  will-change: max-height, padding, background;
+}
+#realizacje .tile-desc{
+  transition:
+    opacity .35s ease var(--desc-delay),
+    transform .35s ease var(--desc-delay),
+    max-height .35s ease var(--desc-delay);
+  will-change: opacity, transform, max-height;
+}
+/* Przy WEJŚCIU: overlay rozsuń od razu, opis po chwili — efekt premium */
+#realizacje .tile-media:hover,
+#realizacje .tile-media:focus-within{
+  --cap-delay: 0s;
+  --desc-delay: .05s;
+}
