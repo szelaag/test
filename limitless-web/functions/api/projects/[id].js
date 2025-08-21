@@ -1,45 +1,66 @@
 import { json, bad, getCookie, verifySession } from '../../_utils.mjs';
 
-export const onRequestGet = async ({ params, env }) => {
+function corsHeaders(request) {
+  const origin = request.headers.get('Origin') || '*';
+  return {
+    'Access-Control-Allow-Origin': origin,
+    'Vary': 'Origin',
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Allow-Headers': 'Content-Type, Accept',
+    'Access-Control-Allow-Methods': 'GET,PUT,DELETE,OPTIONS'
+  };
+}
+
+export const onRequestOptions = async ({ request }) => {
+  return new Response(null, { status: 204, headers: corsHeaders(request) });
+};
+
+export const onRequestGet = async ({ params, env, request }) => {
   const id = Number(params.id);
-  if(!id) return bad('Invalid id');
-  const row = await env.DB.prepare('SELECT id, title, description, imageUrl, linkUrl, order_num, created_at FROM projects WHERE id = ?').bind(id).first();
-  if(!row) return json({error:'Not found'}, 404);
-  return json(row);
+  if (!id) return bad('Invalid id');
+  const row = await env.DB
+    .prepare('SELECT id, title, description, imageUrl, linkUrl, order_num, created_at FROM projects WHERE id = ?')
+    .bind(id).first();
+  if (!row) return json({ error: 'Not found' }, 404, corsHeaders(request));
+  return json(row, 200, corsHeaders(request));
 };
 
 export const onRequestPut = async ({ request, params, env }) => {
   const session = getCookie(request, 'session');
   const user = await verifySession(session, env.SESSION_SECRET || '');
-  if(!user) return json({error:'Unauthorized'}, 401);
+  if (!user) return json({ error: 'Unauthorized' }, 401, corsHeaders(request));
 
   const id = Number(params.id);
-  if(!id) return bad('Invalid id');
-  const data = await request.json().catch(()=>null);
-  if(!data) return bad('Brak danych');
-  const { title, description, imageUrl, linkUrl, order_num } = data;
+  if (!id) return bad('Invalid id');
+
+  const data = await request.json().catch(() => null);
+  if (!data) return bad('Brak danych');
 
   const existing = await env.DB.prepare('SELECT * FROM projects WHERE id=?').bind(id).first();
-  if(!existing) return json({error:'Not found'}, 404);
+  if (!existing) return json({ error: 'Not found' }, 404, corsHeaders(request));
 
-  const newTitle = (title ?? existing.title);
-  const newDesc = (description ?? existing.description);
-  const newImg  = (imageUrl ?? existing.imageUrl);
-  const newLink = (linkUrl ?? existing.linkUrl);
-  const newOrder = (order_num ?? existing.order_num);
+  const newTitle = (data.title ?? existing.title);
+  const newDesc  = (data.description ?? existing.description);
+  const newImg   = (data.imageUrl ?? existing.imageUrl);
+  const newLink  = (data.linkUrl ?? existing.linkUrl);
+  const newOrder = (data.order_num ?? existing.order_num);
 
-  await env.DB.prepare('UPDATE projects SET title=?1, description=?2, imageUrl=?3, linkUrl=?4, order_num=?5 WHERE id=?6').bind(newTitle, newDesc, newImg, newLink, Number(newOrder)||0, id).run();
+  await env.DB
+    .prepare('UPDATE projects SET title=?1, description=?2, imageUrl=?3, linkUrl=?4, order_num=?5 WHERE id=?6')
+    .bind(newTitle, newDesc, newImg, newLink, Number(newOrder) || 0, id)
+    .run();
+
   const row = await env.DB.prepare('SELECT * FROM projects WHERE id=?').bind(id).first();
-  return json(row);
+  return json(row, 200, corsHeaders(request));
 };
 
 export const onRequestDelete = async ({ params, env, request }) => {
   const session = getCookie(request, 'session');
   const user = await verifySession(session, env.SESSION_SECRET || '');
-  if(!user) return json({error:'Unauthorized'}, 401);
+  if (!user) return json({ error: 'Unauthorized' }, 401, corsHeaders(request));
 
   const id = Number(params.id);
-  if(!id) return bad('Invalid id');
+  if (!id) return bad('Invalid id');
   await env.DB.prepare('DELETE FROM projects WHERE id=?').bind(id).run();
-  return new Response(null, {status:204});
+  return new Response(null, { status: 204, headers: corsHeaders(request) });
 };
